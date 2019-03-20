@@ -1,3 +1,5 @@
+# Bootloaders
+
 ### What happens when my computer boots?
 
 ##### BIOS / UEFI
@@ -29,13 +31,11 @@ The bootloader is the first program that will be run off of a Local Drive (HDD o
 
 Bootloaders are all different, but are ultimately intended to locate and execute another more complicated system, and hand control over to it. The process of using a bootloader to bootstrap a more complicated and better equipped bootloader is very common, and is referred to as "chain-loading". Some boot loaders allow user input, and allow the user to choose between several Operating Systems (which could require more chainloading)
 
-Bootloaders can be categorised into "stages", depending on where they are stored on the disk, which corresponds directly to their complexity.
+Bootloaders can be categorised into "stages", depending on where they are stored on the disk, which corresponds directly to their complexity:
 
-"Stage 1" bootloaders are located in the MBR (or VBR), and contain a maximum of 446 bytes of executable machine code.
-
-"Stage 1.5" bootloaders are located in the "MBR Gap", or rarely have their own partition (e.g: BIOS_grub, BIOS Boot Partition)
-
-"Stage 2" bootloaders are located on the disk, alongside the operating system and files.
+- `Stage 1` bootloaders are located in the MBR (or VBR), and contain a maximum of 446 bytes of executable machine code
+- `Stage 1.5` bootloaders are located in the "MBR Gap", or rarely have their own partition (e.g: BIOS_grub, BIOS Boot Partition)
+- `Stage 2` bootloaders are located on the disk, alongside the operating system and files
 
 ### What is the difference between GPT and MBR?
 
@@ -68,11 +68,42 @@ Drives formatted in MBR have at least 62 sectors (31 KiB) spare. This is known a
 
 VBR - a 512 byte area (1 sector) at the start of a partition, which can contain code for a stage 1.5 bootloader
 
-### What is the difference between booting in UEFI and Legacy Mode/BIOS?
+### What is the difference between booting in UEFI and Legacy Mode?
 
-Most UEFI firmware is capable of booting a drive in either UEFI Mode or legacy mode,
+##### UEFI Mode
 
+Only modern motherboards have the firmware required to perform a UEFI boot. In the past, there were competing standards, rapidly advancing technologies, and the resources required to boot from the motherboard weren't feasible.
 
+Nowadays, the UEFI firmware simply searches the drive to boot from for a partition of a specific type - An EFI System Partition. These partitions, usually between 100 to 550MiB, contain the Bootloader 
+
+##### Legacy Mode / BIOS
+
+Most UEFI firmware is capable of booting a drive in either UEFI Mode or legacy mode, but older motherboards are only capable of booting using BIOS
+
+##### Comparisons
+
+Booting in UEFI can result in a completely different process, even if the Operating system ends up loaded in the same way.
+
+For example, loading Windows with UEFI would load
+
+https://gyires.inf.unideb.hu/GyBITT/20/ch02s02.html
+https://www.gnu.org/software/grub/manual/grub/html_node/BIOS-installation.html#BIOS-installation
+https://wiki.archlinux.org/index.php/GRUB
+https://metebalci.com/blog/a-quick-tour-of-guid-partition-table-gpt/
+https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/GUID_partition_table.html
+https://github.com/Tonymac32/Amlogic-u-boot/blob/master/doc/README.gpt
+https://resources.infosecinstitute.com/windows-booting-process/#gref
+https://www.quora.com/What-is-the-step-by-step-booting-process-of-Windows
+https://www.thewindowsclub.com/how-does-windows-10-boot
+
+\EFI\Microsoft\Boot\bootmgfw.efi
+%SystemRoot%\system32\winload.efi
+
+Whereas MBR would load:
+
+%SystemDrive%\bootmgr
+%SystemRoot%\system32\winload.exe
+%SystemRoot%\system32\ntoskrnl.exe
 
 ### What is the Compatibility Support Module (CSM)?
 
@@ -92,10 +123,10 @@ Windows Recovery
 ### What are some common bootloaders?
 
 ##### NTLDR
-The legacy bootloader for Windows NT, 2000 and XP.
+The legacy bootloader for Windows NT, 2000 and XP. This bootloader usually silently does its job, but can be seen and interacted with in the event of a power
 
 ##### Windows Boot Manager (Bootmgr)
-The bootloader for Windows Vista, 7, 8 and 10.
+The bootloader for Windows Vista, 7, 8 and 10. Like NTLDR, yo
 
 ##### GRUB
 
@@ -135,6 +166,12 @@ The bootloader for Windows Vista, 7, 8 and 10.
 
 ### Resources
 
-[](https://metebalci.com/blog/a-quick-tour-of-guid-partition-table-gpt/)
-[UEFI Specfification](https://uefi.org/sites/default/files/resources/UEFI%20Spec%202_6.pdf)
-[Managing EFI Boot Loaders for Linux](http://www.rodsbooks.com/efi-bootloaders/index.html)
+- [something](https://metebalci.com/blog/a-quick-tour-of-guid-partition-table-gpt/)
+- [UEFI Specfification](https://uefi.org/sites/default/files/resources/UEFI%20Spec%202_6.pdf)
+- [Managing EFI Boot Loaders for Linux](http://www.rodsbooks.com/efi-bootloaders/index.html)
+- [Resources on Windows + VBR/MBR](https://thestarman.pcministry.com/asm/mbr/W7MBR.htm)
+- [Windows 7 and 8 GPT and EFI](https://thestarman.pcministry.com/asm/mbr/GPT.htm)
+
+### Areas for additional research
+- BIOS Parameter Block (BPB)
+- 
