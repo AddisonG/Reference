@@ -1,0 +1,23 @@
+### Glossary of Acronyms
+
+- `BIOS` Basic Input/Output System
+- `POST` Power On Self Test
+- `OS` Operating System
+- `CPU` Central Processing Unit
+- `RAM` Random Access Memory
+- `ROM` Read Only Memory
+- `EEPROM` Electroncially Erasable Programmable Read Only Memory
+- `GRUB` Grand Unified Bootloader
+- `LILO` Linux Loader
+- `GPT` GUID Partition Table
+- `MBR` Master Boot Record
+- `VBR / PBR` Volume / Partition Boot Record
+- `EFI` Extensible Firmware Interface
+- `UEFI` Unified Extensible Firmware Interface
+- `LBA` Logical Block Addressing
+- `CSM` Compatibility Support Module
+- `BCD` Boot Configuration Data
+- `ESP` EFI System Partition
+- `FS` File System
+- `NTFS` New Technology File System (Windows default)
+- `FAT` File Allocation Table
