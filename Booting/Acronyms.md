@@ -21,3 +21,4 @@
 - `FS` File System
 - `NTFS` New Technology File System (Windows default)
 - `FAT` File Allocation Table
+- `CHS` Cylinder-Head-Sector
