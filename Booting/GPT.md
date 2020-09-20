@@ -15,3 +15,19 @@ Benefits of using GPT include:
 - More partitions (4 -> 128)
 - Greater partition size (2 TiB -> 8 ZiB)
 - Error checking on partition table and headers
+
+# Start Sectors
+LBA 0 is reserved for the Protective MBR.
+LBA 1 is the GPT Header.
+LBA 2-33* are the GPT Partition Entries (128 bytes each).
+LBA 34 is the first useable sector.
+
+*The GPT can be modified to contain less partition entries. E.g: If there was only room for 24 partition entires, then the first (optimal) useable sector would be 8.
+
+To align to 4096-byte alignments, starting on a multiple of 8 is strongly recommended unless you are positive that your disk is using physical sectors of 512 bytes. Thus, 40 is the best first sector for a standard setup.
+Unfortunately, a lot of utilities assume that 2048 is the first sector, and break VERY easily.
+
+
+http://jdebp.eu./FGA/disc-partition-alignment.html
+http://rodsbooks.com./gdisk/
+https://superuser.com/questions/1345844/why-disk-partitions-start-at-sector-2048
